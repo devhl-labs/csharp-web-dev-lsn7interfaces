@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace IceCreamShop
 {
@@ -7,17 +8,24 @@ namespace IceCreamShop
     {
         static void Main(string[] args)
         {
+            if (args.Count() > 0)
+                Console.WriteLine(args);
+
             Case menu = new Case();
-            List<Flavor> availableFlavors = menu.Flavors;
-            List<Cone> availableCones = menu.Cones;
+            List<Flavor> flavors = menu.Flavors;
+            List<Cone> cones = menu.Cones;
 
-        // TODO: Use a Comparer class to sort the 'flavors' array alphabetically by the 'name'
-        //  field.
+            flavors.Sort(new FlavorComparer());
 
-        // TODO: Use a Comparator class to sort the 'cones' array in increasing order by the 'cost'
-        //  field.
+            cones.Sort(new ConeComparer());
 
-        // TODO: Print the 'flavors' and 'cones' lists (in a clear manner) to verify the sorting.
+            foreach (Flavor flavor in flavors)
+                Console.WriteLine(flavor);
+
+            Console.WriteLine();
+
+            foreach(Cone cone in cones)
+                Console.WriteLine(cone);
         }
     }
 }
